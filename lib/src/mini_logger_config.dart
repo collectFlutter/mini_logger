@@ -47,9 +47,9 @@ class MiniLoggerConfig {
   bool? get withPrintColor => _withPrintColor;
 
   /// 初始化配置
-  /// - [minPrintLevel] - 最小打印等级，默认 [MiniLoggerLevelEnum.D]
-  /// - [minSQLiteLevel] - 最小保存日志等级，默认 [MiniLoggerLevelEnum.I]
-  /// - [minUpLevel] - 最小上传等级，默认 [MiniLoggerLevelEnum.W]
+  /// - [minPrintLevel] - 最小打印等级，默认 [MiniLoggerLevelEnum.d]
+  /// - [minSQLiteLevel] - 最小保存日志等级，默认 [MiniLoggerLevelEnum.i]
+  /// - [minUpLevel] - 最小上传等级，默认 [MiniLoggerLevelEnum.w]
   MiniLoggerConfig({
     bool withPrint = true,
     MiniLoggerLevelEnum? minPrintLevel,
@@ -59,19 +59,17 @@ class MiniLoggerConfig {
     bool withPrintColor = false,
     String tag = "mini_log",
     this.upLogEvent,
-  }) {
-    this._withPrint = withPrint;
-    this._withSQLite = ([
-          TargetPlatform.android,
-          TargetPlatform.iOS,
-          TargetPlatform.macOS
-        ].contains(defaultTargetPlatform)) &&
-        withSQLite;
-    this._withPrintColor =
-        (defaultTargetPlatform != TargetPlatform.iOS) && withPrintColor;
-    this._minPrintLevel = minPrintLevel ?? MiniLoggerLevelEnum.D;
-    this._minSQLiteLevel = minSQLiteLevel ?? MiniLoggerLevelEnum.I;
-    this._minUpLevel = minUpLevel ?? MiniLoggerLevelEnum.W;
-    this._tag = tag;
-  }
+  })  : _withPrint = withPrint,
+        _withSQLite = ([
+              TargetPlatform.android,
+              TargetPlatform.iOS,
+              TargetPlatform.macOS
+            ].contains(defaultTargetPlatform)) &&
+            withSQLite,
+        _withPrintColor =
+            (defaultTargetPlatform != TargetPlatform.iOS) && withPrintColor,
+        _minPrintLevel = minPrintLevel ?? MiniLoggerLevelEnum.d,
+        _minSQLiteLevel = minSQLiteLevel ?? MiniLoggerLevelEnum.i,
+        _minUpLevel = minUpLevel ?? MiniLoggerLevelEnum.w,
+        _tag = tag;
 }

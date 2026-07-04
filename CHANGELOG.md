@@ -1,3 +1,13 @@
+## 3.41.9 - 2026-07-04
+
+* **BREAKING**: 升级 Dart SDK 约束至 `>=3.0.0 <4.0.0`
+* **BREAKING**: 升级 Flutter SDK 约束至 `>=3.10.0`
+* 升级 `sqflite` 至 `^2.3.0`，`path` 至 `^1.9.0`，`ansicolor` 至 `^2.0.2`
+* Android: compileSdk/targetSdk 升级至 34，minSdk 升级至 21
+* iOS: 最低部署版本升级至 12.0
+* 代码全面适配 Dart 3 语法和最新 lint 规范
+* `MiniLoggerLevelEnum` 常量值改为小写命名（`v/d/i/w/e`）
+
 ## 3.0.0 - 2023-06-22
 
 * update sdk

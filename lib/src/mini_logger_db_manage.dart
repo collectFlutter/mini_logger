@@ -54,9 +54,9 @@ class MiniLoggerDBManage {
   }
 
   FutureOr<int> insert(MiniLoggerModel log) async {
-    var _dbClient = await _initDb();
-    if (_dbClient == null) return 0;
-    int value = await _dbClient.insert(
+    var dbClient = await _initDb();
+    if (dbClient == null) return 0;
+    int value = await dbClient.insert(
       _logTabName,
       {
         _levelKey: log.level.level,
@@ -70,8 +70,8 @@ class MiniLoggerDBManage {
   }
 
   FutureOr<List<MiniLoggerModel>> query(QueryLogParameter parameter) async {
-    var _dbClient = await _initDb();
-    if (_dbClient == null) return [];
+    var dbClient = await _initDb();
+    if (dbClient == null) return [];
     StringBuffer where = _getWhereBuffer(parameter);
     where.write(" ORDER BY $_createTimeKey DESC");
 
@@ -82,7 +82,7 @@ class MiniLoggerDBManage {
       where.write(
           " LIMIT ${(parameter.pageIndex! - 1) * parameter.pageSize!},${parameter.pageSize!}");
     }
-    List<Map> maps = await _dbClient.query(_logTabName,
+    List<Map> maps = await dbClient.query(_logTabName,
         columns: [_levelKey, _tagKey, _contentKey, _createTimeKey, _statusKey],
         where: where.toString());
     return maps
@@ -97,10 +97,10 @@ class MiniLoggerDBManage {
   }
 
   FutureOr<int> delete(QueryLogParameter parameter) async {
-    var _dbClient = await _initDb();
-    if (_dbClient == null) return 0;
+    var dbClient = await _initDb();
+    if (dbClient == null) return 0;
     StringBuffer buffer = _getWhereBuffer(parameter);
-    return await _dbClient.delete(_logTabName, where: buffer.toString());
+    return await dbClient.delete(_logTabName, where: buffer.toString());
   }
 
   StringBuffer _getWhereBuffer(QueryLogParameter parameter) {

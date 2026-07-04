@@ -18,56 +18,56 @@ class L {
 
   /// Verbose就是冗长啰嗦的。通常表达开发调试过程中的一些详细信息。
   static void v(Object object, {String? tag, bool? withSQLite, bool? withUp}) {
-    if (MiniLoggerLevelEnum.V >= _config.minPrintLevel) {
-      _handleLog(MiniLoggerLevelEnum.V, object,
+    if (MiniLoggerLevelEnum.v >= _config.minPrintLevel) {
+      _handleLog(MiniLoggerLevelEnum.v, object,
           tag: tag, withSQLite: withSQLite, withUp: withUp);
     }
   }
 
   /// Info来表达一些信息。
   static void i(Object object, {String? tag, bool? withSQLite, bool? withUp}) {
-    if (MiniLoggerLevelEnum.I >= _config.minPrintLevel) {
-      _handleLog(MiniLoggerLevelEnum.I, object,
+    if (MiniLoggerLevelEnum.i >= _config.minPrintLevel) {
+      _handleLog(MiniLoggerLevelEnum.i, object,
           tag: tag, withSQLite: withSQLite, withUp: withUp);
     }
   }
 
   ///蓝色，Debug来表达调试信息。
   static void d(Object object, {String? tag, bool? withSQLite, bool? withUp}) {
-    if (MiniLoggerLevelEnum.D >= _config.minPrintLevel) {
-      _handleLog(MiniLoggerLevelEnum.D, object,
+    if (MiniLoggerLevelEnum.d >= _config.minPrintLevel) {
+      _handleLog(MiniLoggerLevelEnum.d, object,
           tag: tag, withSQLite: withSQLite, withUp: withUp);
     }
   }
 
   /// Warn表示警告，但不一定会马上出现错误，开发时有时用来表示特别注意的地方。
   static void w(Object object, {String? tag, bool? withSQLite, bool? withUp}) {
-    if (MiniLoggerLevelEnum.W >= _config.minPrintLevel) {
-      _handleLog(MiniLoggerLevelEnum.W, object,
+    if (MiniLoggerLevelEnum.w >= _config.minPrintLevel) {
+      _handleLog(MiniLoggerLevelEnum.w, object,
           tag: tag, withSQLite: withSQLite, withUp: withUp);
     }
   }
 
   ///Error 出现错误，是最需要关注解决的。
   static void e(Object object, {String? tag, bool? withSQLite, bool? withUp}) {
-    if (MiniLoggerLevelEnum.E >= _config.minPrintLevel) {
-      _handleLog(MiniLoggerLevelEnum.E, object,
+    if (MiniLoggerLevelEnum.e >= _config.minPrintLevel) {
+      _handleLog(MiniLoggerLevelEnum.e, object,
           tag: tag, withSQLite: withSQLite, withUp: withUp);
     }
   }
 
   static Future<List<MiniLoggerModel>> queryLogs(
-      [QueryLogParameter? _parameter]) async {
+      [QueryLogParameter? parameter]) async {
     if (_config.withSQLite ?? false) {
       return await MiniLoggerDBManage.internal()
-          .query(_parameter ?? QueryLogParameter());
+          .query(parameter ?? QueryLogParameter());
     }
     return [];
   }
 
-  static Future<int> deleteLog([QueryLogParameter? _parameter]) async {
+  static Future<int> deleteLog([QueryLogParameter? parameter]) async {
     return await MiniLoggerDBManage.internal()
-        .delete(_parameter ?? QueryLogParameter());
+        .delete(parameter ?? QueryLogParameter());
   }
 
   static void _handleLog(
@@ -87,19 +87,19 @@ class L {
             ((_config.withSQLite ?? false) && level >= _config.minSQLiteLevel));
 
     String content = object.toString();
-    DateTime _now = DateTime.now();
-    MiniLoggerModel _log = MiniLoggerModel(level, tag, content, _now, 0);
+    DateTime now = DateTime.now();
+    MiniLoggerModel log = MiniLoggerModel(level, tag, content, now, 0);
 
     if (withUp) {
-      _config.upLogEvent!(_log).then((value) {
-        _log.status = value ? 1 : 0;
+      _config.upLogEvent!(log).then((value) {
+        log.status = value ? 1 : 0;
         if (withSQLite!) {
-          MiniLoggerDBManage.internal().insert(_log);
+          MiniLoggerDBManage.internal().insert(log);
         }
       });
     } else {
       if (withSQLite) {
-        MiniLoggerDBManage.internal().insert(_log);
+        MiniLoggerDBManage.internal().insert(log);
       }
     }
 
@@ -107,9 +107,9 @@ class L {
       int index = 1;
       AnsiPen pen = AnsiPen()
         ..rgb(
-            r: level.color.red / 255.0,
-            g: level.color.green / 255.0,
-            b: level.color.blue / 255);
+            r: level.color.r / 255.0,
+            g: level.color.g / 255.0,
+            b: level.color.b / 255);
       while (content.isNotEmpty) {
         if (content.length > 1024) {
           print(pen(

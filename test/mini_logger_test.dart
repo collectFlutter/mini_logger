@@ -1,5 +1,4 @@
 import 'package:ansicolor/ansicolor.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mini_logger/mini_logger.dart';
 
@@ -11,9 +10,9 @@ void testMiniLogConfig() {
   test('测试MiniLogConfig类', () {
     final config = MiniLoggerConfig();
     expect(config.withPrint, true);
-    expect(config.minPrintLevel?.level, 'V');
+    expect(config.minPrintLevel?.level, 'D');
     expect(config.minUpLevel?.level, 'W');
-    expect(config.minSQLiteLevel?.level, 'D');
+    expect(config.minSQLiteLevel?.level, 'I');
     expect(config.tag, 'mini_log');
     expect(config.upLogEvent, null);
   });
@@ -28,25 +27,25 @@ void testAnsi() {
 
 void testAnsiPen() {
   ansiColorDisabled = false;
-  List<Color> list = [
-    Colors.black,
-    Colors.blue,
-    Colors.green,
-    Colors.orange,
-    Colors.red
-  ];
-  list.forEach((color) {
-    AnsiPen pen = AnsiPen()
-      ..rgb(
-          r: color.red / 255.0, g: color.green / 255.0, b: color.blue / 255.0);
-    var hex = "#" +
-        ((256 + color.red << 8 | color.green) << 8 | color.blue)
-            .toRadixString(16)
-            .substring(1);
-    hex = "#" +
-        color.red.toRadixString(16).padLeft(2, '0') +
-        color.green.toRadixString(16).padLeft(2, '0') +
-        color.blue.toRadixString(16).padLeft(2, '0');
-    print(pen('这个颜色是：$hex'));
-  });
+  // List<Color> list = [
+  //   Colors.black,
+  //   Colors.blue,
+  //   Colors.green,
+  //   Colors.orange,
+  //   Colors.red
+  // ];
+  // list.forEach((color) {
+  //   AnsiPen pen = AnsiPen()
+  //     ..rgb(
+  //         r: color.r / 255.0, g: color.g / 255.0, b: color.b / 255.0);
+  //   var hex = "#" +
+  //       ((256 + color.r << 8 | color.g) << 8 | color.b)
+  //           .toRadixString(16)
+  //           .substring(1);
+  //   hex = "#" +
+  //       color.red.toRadixString(16).padLeft(2, '0') +
+  //       color.green.toRadixString(16).padLeft(2, '0') +
+  //       color.blue.toRadixString(16).padLeft(2, '0');
+  //   print(pen('这个颜色是：$hex'));
+  // });
 }

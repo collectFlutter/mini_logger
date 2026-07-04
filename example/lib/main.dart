@@ -10,9 +10,9 @@ void main() {
     tag: 'mini_logger_example',
     withSQLite: true,
     upLogEvent: upLog,
-    minSQLiteLevel: MiniLoggerLevelEnum.V,
+    minSQLiteLevel: MiniLoggerLevelEnum.v,
   ));
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 Future<bool> upLog(MiniLoggerModel log) async {
@@ -21,6 +21,8 @@ Future<bool> upLog(MiniLoggerModel log) async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -119,9 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             if (index.isOdd) return Divider();
-            MiniLoggerModel _log = _list[(index / 2).floor()];
-            return Text(_log.toString(),
-                style: TextStyle(color: _log.level.color));
+            MiniLoggerModel log = _list[(index / 2).floor()];
+            return Text(log.toString(),
+                style: TextStyle(color: log.level.color));
           },
           itemCount: _list.length * 2,
         ),

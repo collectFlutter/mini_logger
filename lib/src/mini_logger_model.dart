@@ -18,17 +18,17 @@ class MiniLoggerLevelEnum {
 
   const MiniLoggerLevelEnum._(this.level, this.color, this.serverTag);
 
-  static final MiniLoggerLevelEnum V =
+  static const MiniLoggerLevelEnum v =
       MiniLoggerLevelEnum._('V', Colors.black, 'trace');
-  static final MiniLoggerLevelEnum D =
+  static const MiniLoggerLevelEnum d =
       MiniLoggerLevelEnum._('D', Colors.blue, 'debug');
-  static final MiniLoggerLevelEnum I =
+  static const MiniLoggerLevelEnum i =
       MiniLoggerLevelEnum._('I', Colors.green, 'info');
-  static final MiniLoggerLevelEnum W =
+  static const MiniLoggerLevelEnum w =
       MiniLoggerLevelEnum._('W', Colors.orange, 'warn');
-  static final MiniLoggerLevelEnum E =
+  static const MiniLoggerLevelEnum e =
       MiniLoggerLevelEnum._('E', Colors.red, 'error');
-  static final List<MiniLoggerLevelEnum> all = [V, D, I, W, E];
+  static const List<MiniLoggerLevelEnum> all = [v, d, i, w, e];
 
   static MiniLoggerLevelEnum? of(String level) {
     var index = _levelStr.indexOf(level.toUpperCase());
