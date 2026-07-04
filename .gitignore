@@ -810,3 +810,10 @@ doc/api/
 .packages
 
 manage.py
+
+# Allow checked-in files that match ignore patterns
+!mini_log.iml
+!pubspec.lock
+!example/pubspec.lock
+!example/android/app/src/debug/
+!example/android/app/src/debug/AndroidManifest.xml

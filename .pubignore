@@ -1,0 +1,33 @@
+# Files to exclude from published package
+.dart_tool/
+.idea/
+*.iml
+build/
+doc/api/
+
+# Example app - not needed in published package
+example/.dart_tool/
+example/.flutter-plugins
+example/.flutter-plugins-dependencies
+example/.metadata
+example/pubspec.lock
+example/android/.gradle/
+example/android/app/build/
+example/android/build/
+example/android/local.properties
+example/ios/Flutter/Generated.xcconfig
+example/ios/Flutter/ephemeral/
+example/ios/Pods/
+example/ios/Runner.xcodeproj/project.xcworkspace/xcuserdata/
+example/ios/Runner.xcodeproj/xcuserdata/
+example/macos/Flutter/ephemeral/
+example/macos/Pods/
+example/macos/Runner.xcodeproj/xcuserdata/
+
+# IDE and OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Lock files (not needed for libraries)
+pubspec.lock
