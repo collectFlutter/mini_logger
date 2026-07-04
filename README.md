@@ -18,7 +18,7 @@ Add `mini_logger` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  mini_logger: ^4.0.0
+  mini_logger: ^3.41.9
 ```
 
 ## Usage
