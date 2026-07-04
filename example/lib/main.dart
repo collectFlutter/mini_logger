@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -8,13 +7,12 @@ import 'package:english_words/english_words.dart';
 
 void main() {
   L.init(MiniLoggerConfig(
-    tag: 'mini_log_example',
+    tag: 'mini_logger_example',
     withSQLite: true,
     upLogEvent: upLog,
-    minSQLiteLevel: MiniLoggerLevelEnum.V,
-    withPrintColor: !Platform.isIOS,
+    minSQLiteLevel: MiniLoggerLevelEnum.v,
   ));
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 Future<bool> upLog(MiniLoggerModel log) async {
@@ -23,6 +21,8 @@ Future<bool> upLog(MiniLoggerModel log) async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _controller;
+  TextEditingController _controller = TextEditingController();
   QueryLogParameter _parameter = QueryLogParameter();
 
   List<MiniLoggerModel> _list = [];
@@ -55,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     _query();
-    _controller = TextEditingController();
     _controller.addListener(() {
       _parameter.searchKey = _controller.text.trim();
       _query();
@@ -65,7 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _add() async {
     int index = (_counter++) % 5;
-    var log = generateWordPairs().take(math.Random().nextInt(50) + 20).join(' ');
+    var log =
+        generateWordPairs().take(math.Random().nextInt(50) + 20).join(' ');
     switch (index) {
       case 0:
         L.v(log);
@@ -121,8 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             if (index.isOdd) return Divider();
-            MiniLoggerModel _log = _list[(index / 2).floor()];
-            return Text(_log.toString(), style: TextStyle(color: _log.level.color));
+            MiniLoggerModel log = _list[(index / 2).floor()];
+            return Text(log.toString(),
+                style: TextStyle(color: log.level.color));
           },
           itemCount: _list.length * 2,
         ),
@@ -137,7 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.red,
           ),
           SizedBox(height: 20),
-          FloatingActionButton(onPressed: _add, tooltip: 'add', child: Icon(Icons.add))
+          FloatingActionButton(
+              onPressed: _add, tooltip: 'add', child: Icon(Icons.add))
         ],
       ), // This t
     );

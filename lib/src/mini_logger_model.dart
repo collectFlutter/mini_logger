@@ -18,19 +18,19 @@ class MiniLoggerLevelEnum {
 
   const MiniLoggerLevelEnum._(this.level, this.color, this.serverTag);
 
-  static final MiniLoggerLevelEnum V =
+  static const MiniLoggerLevelEnum v =
       MiniLoggerLevelEnum._('V', Colors.black, 'trace');
-  static final MiniLoggerLevelEnum D =
+  static const MiniLoggerLevelEnum d =
       MiniLoggerLevelEnum._('D', Colors.blue, 'debug');
-  static final MiniLoggerLevelEnum I =
+  static const MiniLoggerLevelEnum i =
       MiniLoggerLevelEnum._('I', Colors.green, 'info');
-  static final MiniLoggerLevelEnum W =
+  static const MiniLoggerLevelEnum w =
       MiniLoggerLevelEnum._('W', Colors.orange, 'warn');
-  static final MiniLoggerLevelEnum E =
+  static const MiniLoggerLevelEnum e =
       MiniLoggerLevelEnum._('E', Colors.red, 'error');
-  static final List<MiniLoggerLevelEnum> all = [V, D, I, W, E];
+  static const List<MiniLoggerLevelEnum> all = [v, d, i, w, e];
 
-  static MiniLoggerLevelEnum of(String level) {
+  static MiniLoggerLevelEnum? of(String level) {
     var index = _levelStr.indexOf(level.toUpperCase());
     if (index > 0) {
       return all[index];
@@ -52,7 +52,7 @@ class MiniLoggerLevelEnum {
   String toString() =>
       'LogTypeEnum{level: $level, color: $color, serverTag: $serverTag}';
 
-  bool operator >=(MiniLoggerLevelEnum other) =>
+  bool operator >=(MiniLoggerLevelEnum? other) =>
       other == null ||
       _levelStr.indexOf(this.level) >= _levelStr.indexOf(other.level);
 }
@@ -84,25 +84,25 @@ class MiniLoggerModel {
 
 class QueryLogParameter {
   /// 页码，只支持查询
-  int pageIndex;
+  int? pageIndex;
 
   /// 每页查询大小
-  int pageSize;
+  int? pageSize;
 
   /// 包含的等级
-  List<MiniLoggerLevelEnum> level;
+  List<MiniLoggerLevelEnum>? level;
 
   /// 内容查询的关键字
-  String searchKey;
+  String? searchKey;
 
   /// 最早时间
-  DateTime minTime;
+  DateTime? minTime;
 
   /// 最晚时间
-  DateTime maxTime;
+  DateTime? maxTime;
 
   /// 特定标签
-  String tag;
+  String? tag;
 
   QueryLogParameter(
       {this.pageIndex = 1,
